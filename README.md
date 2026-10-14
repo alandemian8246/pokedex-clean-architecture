@@ -291,4 +291,4 @@ frontend/src
 ## GenAI usage
 
 See [docs/GENAI.md](docs/GENAI.md). It contains the prompt for the task-management exercise, a sample of the output,
-how it was validated and corrected, and how AI was used in this repository.
+and how it was validated and corrected.

@@ -1,7 +1,7 @@
 # GenAI exercise: Task management API
 
-This answers the brief's "Generative AI tools" section. Tool: **Claude Code** (CLI agent). The same workflow
-(scope the prompt, generate, verify independently, correct) was used while building this repository.
+This answers the brief's "Generative AI tools" section: the prompt, a sample of the output, and how the output
+was validated and corrected.
 
 ---
 
@@ -173,14 +173,3 @@ public record UpdateTaskRequest(
 - **Edge cases covered by tests:** empty or whitespace title, title at exactly 120 and 121 characters,
   due date today versus yesterday (fixed `Clock`), concurrent update (two versions), deleting an already
   deleted task (404), pagination past the last page (empty page, not an error).
-
-## 6. How GenAI was used in this repository
-
-- **Generation:** layer scaffolding, test skeletons, PokeAPI DTO records, and repetitive mapping and response code.
-- **Kept under my control:** architecture boundaries, the HTTP contract and status codes, the security rules,
-  and what each test must prove.
-- **Verified by running, not by trusting:**
-  - the full test suite;
-  - manual calls against the live PokeAPI, which revealed that evolution details are now listed per game
-    version with an `is_default` flag, and led to a mapper fix plus a regression test;
-  - a headless-browser walkthrough of every user story to confirm the UI works and the console stays clean.
