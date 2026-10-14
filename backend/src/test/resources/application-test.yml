@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    # a fresh in-memory database per Spring test context
+    url: jdbc:h2:mem:test-${random.uuid};MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1
+
+pokeapi:
+  base-url: http://localhost:0/unused
+
+app:
+  seed:
+    demo-users: false

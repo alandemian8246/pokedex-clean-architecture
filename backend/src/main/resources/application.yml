@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: pokedex-api
+  datasource:
+    # In-memory H2 (PostgreSQL mode) by default; docker-compose points this at PostgreSQL.
+    url: ${DB_URL:jdbc:h2:mem:pokedex;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_batch_fetch_size: 50
+  flyway:
+    enabled: true
+  cache:
+    cache-names: pokeapi-pages,pokeapi-pokemon,pokeapi-species,pokeapi-evolution-chains
+    caffeine:
+      spec: maximumSize=2000,expireAfterWrite=12h,recordStats
+  threads:
+    virtual:
+      enabled: true
+
+pokeapi:
+  base-url: ${POKEAPI_BASE_URL:https://pokeapi.co/api/v2}
+  connect-timeout: 3s
+  read-timeout: 10s
+
+security:
+  jwt:
+    # Override JWT_SECRET outside local development.
+    secret: ${JWT_SECRET:local-development-secret-change-me-0123456789}
+    ttl: 8h
+    issuer: pokedex-api
+
+app:
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+  seed:
+    demo-users: ${SEED_DEMO_USERS:true}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,caches
